@@ -9,6 +9,7 @@ import TopNavbar from '@/components/dashboard/TopNavbar';
 import JobRecommendations from '@/components/dashboard/JobRecommendations';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import Statistics from '@/components/dashboard/Statistics';
+import CVUpload from '@/components/dashboard/CVUpload';
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -51,6 +52,11 @@ export default function Dashboard() {
               {/* Recent Activity - Spans 1/3 on desktop */}
               <div className='lg:col-span-1'>
                 <RecentActivity />
+              </div>
+
+              {/* CV Upload Section - Spans full width */}
+              <div className='lg:col-span-3'>
+                <CVUpload />
               </div>
             </div>
           </div>
