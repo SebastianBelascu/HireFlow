@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  user_id           String  @map("user_id")
+  type              String
+  provider          String
+  provider_account_id String @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([provider, provider_account_id])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  session_token String  @unique @map("session_token")
+  user_id      String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  name          String?
+  email_verified DateTime? @map("email_verified")
+  image         String?
+  role          UserRole  @default(USER)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  profile       Profile?
+  applications  JobApplication[]
+  jobs          Job[]
+  bookmarks     Bookmark[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Profile {
+  id           String   @id @default(uuid())
+  user_id      String   @unique
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  cv_url       String?
+  skills       String[] @default([])
+  experience   String?
+  education    String?
+  work_history Json?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model Job {
+  id              String   @id @default(uuid())
+  title           String
+  company_name    String
+  location        String
+  description     String   @db.Text
+  required_skills String[] @default([])
+  salary_min      Int?
+  salary_max      Int?
+  job_type        String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  created_by      String
+  user            User     @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  applications    JobApplication[]
+  bookmarks       Bookmark[]
+
+  @@map("jobs")
+}
+
+model JobApplication {
+  id         String            @id @default(uuid())
+  job_id     String
+  user_id    String
+  status     ApplicationStatus @default(PENDING)
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
+  job        Job              @relation(fields: [job_id], references: [id], onDelete: Cascade)
+  user       User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([job_id, user_id])
+  @@map("job_applications")
+}
+
+enum ApplicationStatus {
+  PENDING
+  REVIEWED
+  ACCEPTED
+  REJECTED
+}
+
+model Bookmark {
+  id         String   @id @default(uuid())
+  user_id    String
+  job_id     String
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  job        Job      @relation(fields: [job_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, job_id])
+  @@map("bookmarks")
+}
+
