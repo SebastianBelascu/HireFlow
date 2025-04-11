@@ -86,7 +86,7 @@ export async function GET(req: Request) {
     const jobs = await prisma.job.findMany({
       where,
       orderBy: {
-        createdAt: 'desc',
+        created_at: 'desc',
       },
     });
 
