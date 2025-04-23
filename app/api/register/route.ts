@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { hash } from "bcrypt"
+import { hash } from "bcryptjs"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
@@ -41,4 +41,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Something went wrong" }, { status: 500 })
   }
 }
-
