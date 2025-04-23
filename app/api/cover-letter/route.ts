@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!profile || !profile.cvUrl) {
+    if (!profile || !profile.cv_url) {
       return NextResponse.json(
         { message: 'Profile or CV not found' },
         { status: 404 }
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       
       About the candidate:
       - Name: ${session.user.name || 'The candidate'}
-      - Skills: ${profile.skills.join(', ')}
+      - Skills: ${profile.skills ? profile.skills.join(', ') : 'Not provided'}
       - Experience: ${profile.experience || 'Not provided'}
       - Education: ${profile.education || 'Not provided'}
       

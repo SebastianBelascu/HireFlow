@@ -8,6 +8,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+export { openai };
+
 export async function analyzeCV(cvContent: string) {
   const prompt = `
     Extract the following information from this CV:
@@ -52,17 +54,17 @@ export async function getJobRecommendations(userProfile: any, jobs: any[]) {
         (job, index) => `
     Job ${index + 1}:
     - Title: ${job.title}
-    - Company: ${job.companyName}
-    - Required Skills: ${job.requiredSkills.join(', ')}
-    - Description: ${job.description.substring(0, 200)}...
+    - Company: ${job.company_name}
+    - Required Skills: ${job.required_skills ? job.required_skills.join(', ') : 'None'}
+    - Description: ${job.description ? job.description.substring(0, 200) : ''}...
     - ID: ${job.id}
     `
       )
       .join('\n')}
     
     Return a JSON array with the top 5 job matches, each containing:
-    1. jobId: The ID of the job
-    2. relevanceScore: A score from 0-100 indicating how well the candidate matches the job
+    1. job_id: The ID of the job
+    2. relevance_score: A score from 0-100 indicating how well the candidate matches the job
     3. reasons: A brief explanation of why this job is a good match
     
     Only return the JSON array, no other text.

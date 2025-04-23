@@ -10,14 +10,14 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const jobId = params.id
+    const jobId = await params.id
 
     // Check if bookmark exists
     const bookmark = await prisma.bookmark.findUnique({
       where: {
-        userId_jobId: {
-          userId: session.user.id,
-          jobId,
+        user_id_job_id: {
+          user_id: session.user.id,
+          job_id: jobId,
         },
       },
     })
@@ -29,9 +29,9 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     // Delete bookmark
     await prisma.bookmark.delete({
       where: {
-        userId_jobId: {
-          userId: session.user.id,
-          jobId,
+        user_id_job_id: {
+          user_id: session.user.id,
+          job_id: jobId,
         },
       },
     })
@@ -42,4 +42,3 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     return NextResponse.json({ message: "Error removing bookmark" }, { status: 500 })
   }
 }
-

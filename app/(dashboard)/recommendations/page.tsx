@@ -25,7 +25,7 @@ interface Job {
   required_skills: string[];
   salary_min: number | null;
   salary_max: number | null;
-  relevanceScore: number;
+  relevance_score: number;
   reasons: string;
 }
 
@@ -150,24 +150,29 @@ export default function RecommendationsPage() {
             <Card key={job.id} className='border-primary'>
               <div className='absolute right-4 top-4 flex items-center gap-1 rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground'>
                 <Sparkles className='h-3 w-3' />
-                <span>{job.relevanceScore}% Match</span>
+                <span>{job.relevance_score}% Match</span>
               </div>
               <CardHeader>
                 <CardTitle>{job.title}</CardTitle>
                 <CardDescription>{job.company_name}</CardDescription>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <div className='flex items-center text-sm text-muted-foreground'>
-                  <MapPin className='mr-1 h-4 w-4' />
-                  {job.location}
-                  <span className='mx-2'>•</span>
-                  <BriefcaseBusiness className='mr-1 h-4 w-4' />
-                  {job.job_type}
+                <div className='flex flex-col sm:flex-row items-start sm:items-center text-sm text-muted-foreground flex-wrap gap-2 sm:gap-0'>
+                  <div className="flex items-center">
+                    <MapPin className='mr-1 h-4 w-4' />
+                    {job.location}
+                  </div>
+                  <span className='hidden sm:block mx-2'>•</span>
+                  <div className="flex items-center">
+                    <BriefcaseBusiness className='mr-1 h-4 w-4' />
+                    {job.job_type}
+                  </div>
                   {job.salary_min && job.salary_max && (
                     <>
-                      <span className='mx-2'>•</span>$
-                      {job.salary_min.toLocaleString()} - $
-                      {job.salary_max.toLocaleString()}
+                      <span className='hidden sm:block mx-2'>•</span>
+                      <div className="flex items-center">
+                        ${job.salary_min.toLocaleString()} - ${job.salary_max.toLocaleString()}
+                      </div>
                     </>
                   )}
                 </div>
@@ -200,8 +205,8 @@ export default function RecommendationsPage() {
                   )}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button asChild>
+              <CardFooter className='flex flex-col sm:flex-row gap-3 sm:justify-between'>
+                <Button asChild className="w-full sm:w-auto">
                   <Link href={`/jobs/${job.id}`}>View Job</Link>
                 </Button>
               </CardFooter>

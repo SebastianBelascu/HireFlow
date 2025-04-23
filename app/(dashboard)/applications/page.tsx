@@ -40,15 +40,15 @@ export default async function ApplicationsPage() {
         <div className='grid gap-6'>
           {applications.map((application) => (
             <Card key={application.id}>
-              <CardHeader className='flex flex-row items-start justify-between'>
+              <CardHeader className='flex flex-col sm:flex-row items-start justify-between gap-2'>
                 <div>
                   <CardTitle>{application.job.title}</CardTitle>
                   <CardDescription>
-                    {application.job.companyName}
+                    {application.job.company_name}
                   </CardDescription>
                 </div>
                 <div
-                  className={`text-xs px-2 py-1 rounded-full ${
+                  className={`text-xs px-2 py-1 rounded-full self-start ${
                     application.status === 'PENDING'
                       ? 'bg-yellow-100 text-yellow-800'
                       : application.status === 'REVIEWED'
@@ -63,16 +63,16 @@ export default async function ApplicationsPage() {
                 </div>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <div className='flex items-center justify-between text-sm'>
+                <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between text-sm gap-3'>
                   <div className='flex items-center'>
                     <span className='text-muted-foreground'>Applied:</span>
                     <span className='ml-1'>
-                      {formatDistanceToNow(new Date(application.createdAt), {
+                      {formatDistanceToNow(new Date(application.created_at), {
                         addSuffix: true,
                       })}
                     </span>
                   </div>
-                  <Button size='sm' variant='outline' asChild>
+                  <Button size='sm' variant='outline' asChild className="w-full sm:w-auto">
                     <Link href={`/jobs/${application.job.id}`}>View Job</Link>
                   </Button>
                 </div>

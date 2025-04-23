@@ -11,7 +11,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     const isAdmin = session.user.role === "ADMIN"
-    const isOwnProfile = params.id === session.user.id
+    const userId = await params.id
+    const isOwnProfile = userId === session.user.id
 
     // Only allow admins or the user themselves to view profiles
     if (!isAdmin && !isOwnProfile) {
@@ -20,7 +21,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
     const profile = await prisma.profile.findUnique({
       where: {
-        userId: params.id,
+        user_id: userId,
       },
     })
 
@@ -34,4 +35,3 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json({ message: "Error fetching profile" }, { status: 500 })
   }
 }
-

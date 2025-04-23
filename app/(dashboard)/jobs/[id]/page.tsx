@@ -31,6 +31,7 @@ interface Job {
 
 export default async function JobPage({ params }: { params: { id: string } }) {
   const session = await getAuthSession();
+  const jobId = await params.id;
 
   // Get the user from the database to ensure we have the ID and role
   const user = session?.user?.email
@@ -42,7 +43,7 @@ export default async function JobPage({ params }: { params: { id: string } }) {
 
   const job = await prisma.job.findUnique({
     where: {
-      id: params.id,
+      id: jobId,
     },
   });
 

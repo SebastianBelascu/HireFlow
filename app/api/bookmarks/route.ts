@@ -53,23 +53,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if job exists
-    const job = await prisma.job.findUnique({
-      where: {
-        id: jobId,
-      },
-    });
-
-    if (!job) {
-      return NextResponse.json({ message: 'Job not found' }, { status: 404 });
-    }
-
     // Check if already bookmarked
     const existingBookmark = await prisma.bookmark.findUnique({
       where: {
-        userId_jobId: {
-          userId: session.user.id,
-          jobId,
+        user_id_job_id: {
+          user_id: session.user.id,
+          job_id: jobId,
         },
       },
     });
@@ -81,11 +70,25 @@ export async function POST(req: Request) {
       );
     }
 
+    // Check if job exists
+    const job = await prisma.job.findUnique({
+      where: {
+        id: jobId,
+      },
+    });
+
+    if (!job) {
+      return NextResponse.json(
+        { message: 'Job not found' },
+        { status: 404 }
+      );
+    }
+
     // Create bookmark
     const bookmark = await prisma.bookmark.create({
       data: {
-        userId: session.user.id,
-        jobId,
+        user_id: session.user.id,
+        job_id: jobId,
       },
     });
 

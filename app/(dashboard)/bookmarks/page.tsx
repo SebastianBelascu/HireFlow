@@ -17,11 +17,11 @@ import { useEffect, useState } from 'react';
 interface Job {
   id: string;
   title: string;
-  companyName: string;
+  company_name: string;
   location: string;
   jobType: string;
   description: string;
-  requiredSkills: string[];
+  required_skills: string[];
   salaryMin: number | null;
   salaryMax: number | null;
 }
@@ -110,20 +110,25 @@ export default function BookmarksPage() {
             <Card key={job.id}>
               <CardHeader>
                 <CardTitle>{job.title}</CardTitle>
-                <CardDescription>{job.companyName}</CardDescription>
+                <CardDescription>{job.company_name}</CardDescription>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <div className='flex items-center text-sm text-muted-foreground'>
-                  <MapPin className='mr-1 h-4 w-4' />
-                  {job.location}
-                  <span className='mx-2'>•</span>
-                  <BriefcaseBusiness className='mr-1 h-4 w-4' />
-                  {job.jobType}
+                <div className='flex flex-col sm:flex-row items-start sm:items-center text-sm text-muted-foreground flex-wrap gap-2 sm:gap-0'>
+                  <div className="flex items-center">
+                    <MapPin className='mr-1 h-4 w-4' />
+                    {job.location}
+                  </div>
+                  <span className='hidden sm:block mx-2'>•</span>
+                  <div className="flex items-center">
+                    <BriefcaseBusiness className='mr-1 h-4 w-4' />
+                    {job.jobType}
+                  </div>
                   {job.salaryMin && job.salaryMax && (
                     <>
-                      <span className='mx-2'>•</span>$
-                      {job.salaryMin.toLocaleString()} - $
-                      {job.salaryMax.toLocaleString()}
+                      <span className='hidden sm:block mx-2'>•</span>
+                      <div className="flex items-center">
+                        ${job.salaryMin.toLocaleString()} - ${job.salaryMax.toLocaleString()}
+                      </div>
                     </>
                   )}
                 </div>
@@ -131,7 +136,7 @@ export default function BookmarksPage() {
                   <p className='line-clamp-3 text-sm'>{job.description}</p>
                 </div>
                 <div className='flex flex-wrap gap-2'>
-                  {job.requiredSkills.slice(0, 5).map((skill, index) => (
+                  {job.required_skills && job.required_skills.slice(0, 5).map((skill, index) => (
                     <div
                       key={index}
                       className='rounded-full bg-secondary px-3 py-1 text-xs'
@@ -139,20 +144,21 @@ export default function BookmarksPage() {
                       {skill}
                     </div>
                   ))}
-                  {job.requiredSkills.length > 5 && (
+                  {job.required_skills && job.required_skills.length > 5 && (
                     <div className='rounded-full bg-secondary px-3 py-1 text-xs'>
-                      +{job.requiredSkills.length - 5} more
+                      +{job.required_skills.length - 5} more
                     </div>
                   )}
                 </div>
               </CardContent>
-              <CardFooter className='flex justify-between'>
-                <Button asChild>
+              <CardFooter className='flex flex-col sm:flex-row gap-3 sm:justify-between'>
+                <Button asChild className="w-full sm:w-auto">
                   <Link href={`/jobs/${job.id}`}>View Job</Link>
                 </Button>
                 <Button
                   variant='outline'
                   onClick={() => handleRemoveBookmark(job.id)}
+                  className="w-full sm:w-auto"
                 >
                   Remove Bookmark
                 </Button>

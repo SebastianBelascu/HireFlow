@@ -7,9 +7,11 @@ export default async function EditJobPage({
 }: {
   params: { id: string };
 }) {
+  const jobId = await params.id;
+  
   const job = await prisma.job.findUnique({
     where: {
-      id: params.id,
+      id: jobId,
     },
   });
 

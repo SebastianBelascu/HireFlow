@@ -40,13 +40,13 @@ export async function GET(req: Request) {
       recommendations.map(async (rec: any) => {
         const job = await prisma.job.findUnique({
           where: {
-            id: rec.jobId,
+            id: rec.job_id,
           },
         });
 
         return {
           ...job,
-          relevanceScore: rec.relevanceScore,
+          relevance_score: rec.relevance_score,
           reasons: rec.reasons,
         };
       })

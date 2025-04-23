@@ -155,20 +155,25 @@ export default async function JobsPage({
               )}
               <CardHeader>
                 <CardTitle>{job.title}</CardTitle>
-                <CardDescription>{job.companyName}</CardDescription>
+                <CardDescription>{job.company_name}</CardDescription>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <div className='flex items-center text-sm text-muted-foreground'>
-                  <MapPin className='mr-1 h-4 w-4' />
-                  {job.location}
-                  <span className='mx-2'>•</span>
-                  <BriefcaseBusiness className='mr-1 h-4 w-4' />
-                  {job.job_type}
+                <div className='flex flex-col sm:flex-row items-start sm:items-center text-sm text-muted-foreground flex-wrap gap-2 sm:gap-0'>
+                  <div className="flex items-center">
+                    <MapPin className='mr-1 h-4 w-4' />
+                    {job.location}
+                  </div>
+                  <span className='hidden sm:block mx-2'>•</span>
+                  <div className="flex items-center">
+                    <BriefcaseBusiness className='mr-1 h-4 w-4' />
+                    {job.job_type}
+                  </div>
                   {job.salary_min && job.salary_max && (
                     <>
-                      <span className='mx-2'>•</span>$
-                      {job.salary_min.toLocaleString()} - $
-                      {job.salary_max.toLocaleString()}
+                      <span className='hidden sm:block mx-2'>•</span>
+                      <div className="flex items-center">
+                        ${job.salary_min.toLocaleString()} - ${job.salary_max.toLocaleString()}
+                      </div>
                     </>
                   )}
                 </div>

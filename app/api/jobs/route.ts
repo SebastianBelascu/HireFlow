@@ -79,7 +79,7 @@ export async function GET(req: Request) {
     }
 
     if (jobType && jobType !== 'all') {
-      where.jobType = jobType;
+      where.job_type = jobType;
     }
 
     // Get jobs with filters

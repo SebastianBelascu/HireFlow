@@ -9,7 +9,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Header */}
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
-        <div className="container flex items-center justify-between py-4">
+        <div className="container flex flex-wrap items-center justify-between py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
             <BriefcaseBusiness className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold">HireFlow</span>
@@ -27,37 +27,37 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-24 bg-gradient-to-b from-background to-muted/50">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 items-center">
-              <div className="space-y-6">
+        <section className="py-12 md:py-24 bg-gradient-to-b from-background to-muted/50">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-20 items-center">
+              <div className="space-y-4 md:space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>AI-Powered Job Matching</span>
                 </div>
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl/none max-w-4xl">
                   Find Your Dream Job with AI Precision
                 </h1>
-                <p className="max-w-[600px] text-muted-foreground text-lg/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[600px] text-muted-foreground text-base sm:text-lg/relaxed xl:text-xl/relaxed">
                   HireFlow uses artificial intelligence to match your skills with the perfect job and generate tailored cover letters that get you noticed.
                 </p>
-                <div className="flex flex-col gap-3 min-[400px]:flex-row">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Link href="/register">
-                    <Button size="lg" className="gap-2 shadow-lg">
+                    <Button size="lg" className="w-full sm:w-auto gap-2 shadow-lg">
                       Get Started Free
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
                   <Link href="#how-it-works">
-                    <Button size="lg" variant="outline">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto mt-2 sm:mt-0">
                       See How It Works
                     </Button>
                   </Link>
                 </div>
               </div>
               <div className="flex justify-center">
-                <div className="relative w-full max-w-[560px] aspect-video rounded-xl bg-gradient-to-br from-background via-muted to-muted/80 p-8 shadow-xl border overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl" />
+                <div className="relative w-full max-w-[560px] xl:max-w-[640px] aspect-video rounded-xl bg-gradient-to-br from-background via-muted to-muted/80 p-8 shadow-xl border overflow-hidden">
+                  <div className="absolute top-0 left-0 h-1 w-full bg-primary"></div>
                   <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="flex items-center gap-2 text-lg font-medium mb-6">
                       <Sparkles className="h-5 w-5 text-primary" />
@@ -100,20 +100,20 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="py-20 bg-background">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+        <section id="how-it-works" className="py-12 md:py-20 bg-background">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8 md:mb-12">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">How It Works</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
                   Three Simple Steps to Your Next Career Move
                 </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="text-muted-foreground text-base md:text-lg/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Our AI-powered platform streamlines your job search from start to finish.
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-8 py-8 lg:grid-cols-3 lg:gap-12">
+            <div className="mx-auto grid max-w-6xl items-center gap-6 md:gap-8 py-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
               <Card className="relative overflow-hidden border-2 border-muted bg-background/50 transition-all hover:shadow-lg">
                 <div className="absolute top-0 left-0 h-1 w-full bg-primary"></div>
                 <CardContent className="flex flex-col items-center space-y-4 p-6 text-center">
@@ -158,12 +158,12 @@ export default function Home() {
         </section>
 
         {/* AI Recommendation Feature Highlight */}
-        <section className="py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
+        <section className="py-12 md:py-20 bg-muted/30">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 xl:gap-24 items-center">
               <div className="order-2 lg:order-1">
-                <div className="relative rounded-xl overflow-hidden shadow-xl border bg-background/80 p-1">
-                  <div className="rounded-lg overflow-hidden bg-muted/30 p-6">
+                <div className="relative rounded-xl overflow-hidden shadow-xl border bg-background/80 p-1 max-w-[640px] mx-auto lg:ml-0">
+                  <div className="rounded-lg overflow-hidden bg-muted/30 p-4 md:p-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -203,13 +203,13 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-6 order-1 lg:order-2">
+              <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
                 <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>AI Job Matching</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Smart Job Recommendations</h2>
-                <p className="text-muted-foreground text-lg">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">Smart Job Recommendations</h2>
+                <p className="text-muted-foreground text-base md:text-lg">
                   Our advanced AI algorithm analyzes your resume and compares it with thousands of job listings to find the perfect matches.
                 </p>
                 <ul className="space-y-3">
@@ -240,16 +240,16 @@ export default function Home() {
         </section>
 
         {/* Cover Letter Generator Highlight */}
-        <section className="py-20 bg-background">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="space-y-6">
+        <section className="py-12 md:py-20 bg-background">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 xl:gap-24 items-center">
+              <div className="space-y-4 md:space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                   <Send className="h-3.5 w-3.5" />
                   <span>AI Cover Letter Generator</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Personalized Cover Letters in Seconds</h2>
-                <p className="text-muted-foreground text-lg">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">Personalized Cover Letters in Seconds</h2>
+                <p className="text-muted-foreground text-base md:text-lg">
                   Stand out from the crowd with tailored cover letters that highlight your relevant skills and experience for each job application.
                 </p>
                 <ul className="space-y-3">
@@ -276,8 +276,8 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <div className="relative rounded-xl overflow-hidden shadow-xl border bg-background/80 p-1">
-                  <div className="rounded-lg overflow-hidden bg-muted/30 p-6">
+                <div className="relative rounded-xl overflow-hidden shadow-xl border bg-background/80 p-1 max-w-[640px] mx-auto">
+                  <div className="rounded-lg overflow-hidden bg-muted/30 p-4 md:p-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -304,20 +304,20 @@ export default function Home() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+        <section className="py-12 md:py-20 bg-muted/30">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8 md:mb-12">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Testimonials</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
                   What Our Users Say
                 </h2>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[700px] text-muted-foreground text-base md:text-lg/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Join thousands of job seekers who have found their dream jobs using HireFlow.
                 </p>
               </div>
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 max-w-6xl mx-auto">
               <Card className="bg-background/50 border-2">
                 <CardContent className="p-6">
                   <div className="flex flex-col space-y-4">
@@ -379,24 +379,24 @@ export default function Home() {
         </section>
 
         {/* Call to Action Footer */}
-        <section className="py-20 bg-gradient-to-b from-background to-muted/50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center text-center space-y-8 max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+        <section className="py-12 md:py-20 bg-gradient-to-b from-background to-muted/50">
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-6 md:space-y-8 max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">
                 Ready to Transform Your Job Search?
               </h2>
-              <p className="text-muted-foreground text-lg max-w-[800px]">
+              <p className="text-muted-foreground text-base md:text-lg max-w-[800px]">
                 Join thousands of job seekers who have found their dream jobs with HireFlow's AI-powered job matching and cover letter generation.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <Link href="/register">
-                  <Button size="lg" className="gap-2 shadow-lg">
+                  <Button size="lg" className="w-full sm:w-auto gap-2 shadow-lg">
                     Get Started Free
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/pricing">
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto mt-2 sm:mt-0">
                     View Pricing
                   </Button>
                 </Link>
@@ -412,8 +412,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t py-8 md:py-12">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="container px-4 md:px-6 max-w-7xl mx-auto">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <BriefcaseBusiness className="h-6 w-6 text-primary" />

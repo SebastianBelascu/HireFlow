@@ -11,10 +11,11 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     const isAdmin = session.user.role === "ADMIN"
+    const applicationId = await params.id
 
     const application = await prisma.jobApplication.findUnique({
       where: {
-        id: params.id,
+        id: applicationId,
       },
       include: {
         job: true,
@@ -27,7 +28,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     // Check if user is authorized to view this application
-    if (!isAdmin && application.userId !== session.user.id) {
+    if (!isAdmin && application.user_id !== session.user.id) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
@@ -47,6 +48,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     }
 
     const { status } = await req.json()
+    const applicationId = await params.id
 
     if (!status) {
       return NextResponse.json({ message: "Status is required" }, { status: 400 })
@@ -58,10 +60,9 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
       return NextResponse.json({ message: "Invalid status" }, { status: 400 })
     }
 
-    // Update application status
     const application = await prisma.jobApplication.update({
       where: {
-        id: params.id,
+        id: applicationId,
       },
       data: {
         status,
@@ -74,4 +75,3 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     return NextResponse.json({ message: "Error updating application" }, { status: 500 })
   }
 }
-

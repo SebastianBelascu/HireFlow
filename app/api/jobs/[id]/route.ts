@@ -13,9 +13,11 @@ export async function GET(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
+    const jobId = await params.id;
+
     const job = await prisma.job.findUnique({
       where: {
-        id: params.id,
+        id: jobId,
       },
     });
 
@@ -44,6 +46,8 @@ export async function PATCH(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
+    const jobId = await params.id;
+
     const {
       title,
       companyName,
@@ -66,7 +70,7 @@ export async function PATCH(
     // Update job
     const job = await prisma.job.update({
       where: {
-        id: params.id,
+        id: jobId,
       },
       data: {
         title,
@@ -101,9 +105,11 @@ export async function DELETE(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
+    const jobId = await params.id;
+
     await prisma.job.delete({
       where: {
-        id: params.id,
+        id: jobId,
       },
     });
 
